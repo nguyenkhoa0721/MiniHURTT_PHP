@@ -19,7 +19,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('repo',[repoController::class, 'all']);
-Route::get('repo/{q}',[repoController::class, 'find']);
 Route::post('repo', [repoController::class, 'create']);
 Route::put('repo/{id}', [repoController::class, 'update']);
 Route::delete('repo/{id}', [repoController::class, 'delete']);

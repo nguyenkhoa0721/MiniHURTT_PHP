@@ -13,7 +13,6 @@ class repo extends Model
         'name',
         'link'
     ];
-    protected $dateFormat = 'd-m-Y';
     protected $hidden = [
         'created_at'
     ];

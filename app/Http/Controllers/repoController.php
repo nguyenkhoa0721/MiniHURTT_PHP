@@ -6,15 +6,18 @@ use App\Models\repo;
 
 class repoController extends Controller
 { 
-    public function all(){
-        $repo = repo::orderBy('name')->get();
+    public function all(Request $request){
+        if ($request->query('q')==null){
+            $repo = repo::orderBy('name')->get();
+        }
+        else{
+            $repo = repo::where('name','ilike','%'.trim($request->query('q')).'%')
+                        ->orderBy('name')
+                        ->get();
+        }
         return $repo;
     }
-    public function find($q){
-        return repo::find($q);
-    }
     public function create(Request $request){
-        // echo json_encode($request->all()); 
         return repo::firstOrCreate($request->all());
     } 
     public function update($id, Request $request){
