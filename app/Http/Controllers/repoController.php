@@ -17,6 +17,12 @@ class repoController extends Controller
         }
         return $repo;
     }
+    public function detail($id){
+        $repo = repo::where('id',$id)->get();
+        if ($repo->count())
+            return $repo;
+        return 404;
+    }
     public function create(Request $request){
         return repo::firstOrCreate($request->all());
     } 

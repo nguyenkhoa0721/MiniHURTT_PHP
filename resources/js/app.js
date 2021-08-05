@@ -7,6 +7,16 @@ import VueRouter from 'vue-router';
 
 import homepage from './components/homepage.vue';
 import edit from './components/edit.vue';
+import addnew from './components/new.vue';
+
+
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
+axios.defaults.baseURL = '/api/repo'
+axios.defaults.withCredentials = true;
+
+Vue.use(VueAxios, axios)
 Vue.use(VueRouter)
 
 const routes = [
@@ -15,8 +25,12 @@ const routes = [
         component: homepage
     },
     {
-        path: '/edit',
-        component: edit
+        path: '/new',
+        component: addnew
+    },
+    {
+        path: '/edit/:id',
+        component: edit,
     }
 ]
 

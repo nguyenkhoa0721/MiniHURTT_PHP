@@ -1,6 +1,6 @@
 
 <template>
-  <div v-if = "name!=''" class="container is-max-desktop">
+  <div class="container is-max-desktop">
     <div class="columns is-centered">
       <div class="column is-half mt-5 pt-5">
         <div class="field">
@@ -26,7 +26,7 @@
             </button>
           </div>
           <div class="control">
-            <button class="button is-primary" @click="apply()">Apply</button>
+            <button class="button is-primary" @click="addnew()">Add New</button>
           </div>
         </div>
       </div>
@@ -35,37 +35,18 @@
 </template>
 <script>
 export default {
-  name: "edit",
+  name: "new",
   data() {
     return {
       name: "",
       link: "",
     };
   },
-  created() {
-    this.axios
-      .get(
-        "/" + this.$route.params.id,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-      .then((res) => {
-        this.name = res.data[0].name
-        this.link = res.data[0].link
-      })
-      .catch(function (error) {
-        alert('Khong ton tai')
-        console.log(error);
-      });
-  },
   methods: {
-    apply() {
+    addnew() {
       this.axios
-        .put(
-          "/"+this.$route.params.id,
+        .post(
+          "/",
           {
             name: this.name,
             link: this.link,
@@ -76,7 +57,11 @@ export default {
             },
           }
         )
-        .then((res) => {alert('Update thanh cong')})
+        .then((res) => {
+          this.name = "";
+          this.link = "";
+          alert('Tao moi thanh cong')
+        })
         .catch(function (error) {
           console.log(error);
         });
