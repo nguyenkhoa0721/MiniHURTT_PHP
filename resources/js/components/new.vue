@@ -46,7 +46,7 @@ export default {
     addnew() {
       this.axios
         .post(
-          "/",
+          "",
           {
             name: this.name,
             link: this.link,

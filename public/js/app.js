@@ -2108,7 +2108,7 @@ __webpack_require__.r(__webpack_exports__);
     addnew: function addnew() {
       var _this = this;
 
-      this.axios.post("/", {
+      this.axios.post("", {
         name: this.name,
         link: this.link
       }, {
