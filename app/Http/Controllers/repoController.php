@@ -50,7 +50,7 @@ class repoController extends Controller
             return $a->{"score"} < $b->{"score"} ? 1 : -1;
         });
         $score = array_slice($score,0,3);
-        $repo[0]["rec"] = json_encode($score);
+        $repo[0]["rec"] = $score;
         return $repo;
     }
     public function create(Request $request)

@@ -1880,6 +1880,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "edit",
   data: function data() {
@@ -1889,21 +1908,25 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    var _this = this;
-
-    this.axios.get("/" + this.$route.params.id, {
-      headers: {
-        "Content-Type": "application/json"
-      }
-    }).then(function (res) {
-      _this.name = res.data[0].name;
-      _this.link = res.data[0].link;
-    })["catch"](function (error) {
-      alert('Khong ton tai');
-      console.log(error);
-    });
+    this.getdata();
   },
   methods: {
+    getdata: function getdata() {
+      var _this = this;
+
+      this.axios.get("/" + this.$route.params.id, {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }).then(function (res) {
+        _this.name = res.data[0].name;
+        _this.link = res.data[0].link;
+        _this.rec = res.data[0].rec;
+      })["catch"](function (error) {
+        alert("Khong ton tai");
+        console.log(error);
+      });
+    },
     apply: function apply() {
       this.axios.put("/" + this.$route.params.id, {
         name: this.name,
@@ -1913,10 +1936,17 @@ __webpack_require__.r(__webpack_exports__);
           "Content-Type": "application/json"
         }
       }).then(function (res) {
-        alert('Update thanh cong');
+        alert("Update thanh cong");
       })["catch"](function (error) {
         console.log(error);
       });
+    },
+    routeto: function routeto(id) {
+      this.name = this.link = "";
+      this.$router.push({
+        path: "/edit/" + id
+      });
+      this.getdata();
     }
   }
 });
@@ -20391,7 +20421,41 @@ var render = function() {
               ])
             ])
           ])
-        ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "columns is-multiline is-mobile" },
+          _vm._l(_vm.rec, function(item, index) {
+            return _c("div", { key: index, staticClass: "column is-4" }, [
+              _c("div", { staticClass: "card has-background-white-bis mt-5" }, [
+                _c("div", { staticClass: "card-content" }, [
+                  _c("div", { staticClass: "content" }, [
+                    _c("strong", { staticClass: "text-with-dots" }, [
+                      _vm._v("🟢 " + _vm._s(item.name))
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "block pt-3" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "button is-info is-small",
+                          on: {
+                            click: function($event) {
+                              return _vm.routeto(item.id)
+                            }
+                          }
+                        },
+                        [_vm._v("\n                Edit\n              ")]
+                      )
+                    ])
+                  ])
+                ])
+              ])
+            ])
+          }),
+          0
+        )
       ])
     : _vm._e()
 }
