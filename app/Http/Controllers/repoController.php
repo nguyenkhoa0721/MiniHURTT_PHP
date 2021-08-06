@@ -25,9 +25,9 @@ class repoController extends Controller
         $score = array();
         $listName = repo::where('id', '!=', $id)->pluck('name');
         $listID = repo::where('id', '!=', $id)->pluck('id');
-        $target = "0" . $repo[0]["name"];
+        $target = strtolower("0" . $repo[0]["name"]);
         for ($i = 0; $i < sizeof($listName); $i++) {
-            $comp = "0" . $listName[$i];
+            $comp = strtolower("0" . $listName[$i]);
             $a = [[]];
             for ($h = 0; $h < strlen($target); $h++) {
                 $a[$h][0] = 0;
@@ -46,10 +46,10 @@ class repoController extends Controller
             }
             $score[] = (object) array('id' => $listID[$i], 'name' => $listName[$i], 'score' => $a[strlen($target) - 1][strlen($comp) - 1]);
         }
-        usort($score, function($a, $b) {
+        usort($score, function ($a, $b) {
             return $a->{"score"} < $b->{"score"} ? 1 : -1;
         });
-        $score = array_slice($score,0,3);
+        $score = array_slice($score, 0, 3);
         $repo[0]["rec"] = $score;
         return $repo;
     }
